@@ -15,17 +15,6 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function register(RegistrationRequest $request,SendOTPNotificationAction $sendOTPNotificationAction): JsonResponse
-    {
-        $data = $request->validated();
-
-        $user = User::create($data);
-
-        $sendOTPNotificationAction->execute($user);
-
-        return response()->json(['message' => 'Verification email sent please check your inbox']);
-    }
-
 
     public function login(LoginRequest $request): JsonResponse
     {

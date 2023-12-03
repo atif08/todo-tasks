@@ -31,6 +31,7 @@ class TwoFactorAuthController extends Controller
         }
 
         $user->email_verified_at = now();
+        $user->code = null;
         $user->save();
 
         $user['token'] = $user->createToken($user->email)->plainTextToken;

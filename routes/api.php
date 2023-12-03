@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\TwoFactorAuthController;
 use Illuminate\Support\Facades\Route;
@@ -16,12 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(AuthController::class)->group(function () {
-    Route::post('/register', 'register')->name('register.user');
-//    Route::post('/register/guest', 'register')->name('register.guest');
-    Route::post('login', 'login')->name('user.login');
-});
 
+Route::post('login', [AuthController::class,'login'])->name('login.user');
+Route::post('register', RegisterController::class)->name('register.user');
 Route::post('verify-code', TwoFactorAuthController::class)->name('code.verify');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
